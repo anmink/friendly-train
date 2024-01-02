@@ -8,7 +8,7 @@ print('hi')
 def remove_background(image):
   print("start")
   print(image)
-  input_path = 'input.png'
+  input_path = image
   output_path = 'output.png'
 
   with open(input_path, 'rb') as i:
