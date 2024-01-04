@@ -6,7 +6,7 @@ import cv2
 
 app = Flask(__name__)
 
-print('hi')
+print('hi hi')
 
 def remove_background(image):
   input_path = image
