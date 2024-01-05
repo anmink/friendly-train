@@ -22,7 +22,7 @@ def convert_uri_to_path(uri):
 
 
 def remove_background(image):
-  input_path = image
+  input_path = image[7:]
   print('rembg', input_path)
   output_path = 'file:///var/mobile/Containers/Data/Application/EB7F7691-6BE9-48A6-A9F9-93FA70E0DB45/Library/Caches/ExponentExperienceData/%2540anonymous%252Fdressflow-1d3c3221-3739-4bb6-8c2b-6c7f07405045/out.png'
 
@@ -54,4 +54,4 @@ def image_processing():
     return jsonify({'error call': str(e)})
   
 if __name__ == '__main__':
-  app.run(debug=True, host='0.0.0.0', port='10000')
+  app.run(debug=True, host='0.0.0.0', port='8000')
