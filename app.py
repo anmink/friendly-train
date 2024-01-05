@@ -5,6 +5,7 @@ from PIL import Image
 import cv2
 import os
 import urllib.parse
+import base64
 
 app = Flask(__name__)
 
@@ -40,18 +41,18 @@ def get():
 @app.route('/remove', methods=['POST'])
 def image_processing():
   try:
-    print('try start')
-    #image = '/Users/anne/Library/Developer/CoreSimulator/Devices/9FF48E96-D0C1-401C-876B-58A3E766DBE6/data/Containers/Data/Application/483991C6-B38A-46A2-8DB6-DE00D6D55056/Library/Caches/ExponentExperienceData/%2540anonymous%252Fdressflow-1d3c3221-3739-4bb6-8c2b-6c7f07405045/IMG_4919.jpg'
-    #image_path = 'file:///Users/anne/Library/Developer/CoreSimulator/Devices/9FF48E96-D0C1-401C-876B-58A3E766DBE6/data/Containers/Data/Application/483991C6-B38A-46A2-8DB6-DE00D6D55056/Library/Caches/ExponentExperienceData/%2540anonymous%252Fdressflow-1d3c3221-3739-4bb6-8c2b-6c7f07405045/Camera/FB01E267-FE0C-4D79-9BDF-031358DF9115.jpg'
-    data = request.json
-    image_path = data.get('image')
-    print('print image_path post:', image_path)
-    convert_uri_to_path(image_path)
-    remove_background(image_path)
-    return ('done post')
+    image_base64 = request.get_data()
+    print('image_base64 worked', image_base64)
+    image_bytes = base64.b64decode(image_base64)
+    print('image_bytes worked')
+    removed_background_data = remove(image_base64)
+    print('removed worked')
+
+    removed_background_base64 = base64.b64encode(removed_background_data).decode('utf-8')
+    print(removed_background_base64)
+    return jsonify({'removed_background': removed_background_base64})
   except Exception as e:
-    print('except')
-    return jsonify({'error call': str(e)})
+    return jsonify({'error': str(e)}), 500
   
 if __name__ == '__main__':
-  app.run(debug=True, host='0.0.0.0', port='8000')
+  app.run(debug=True, host='0.0.0.0', port='10000')
