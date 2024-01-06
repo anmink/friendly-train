@@ -43,7 +43,7 @@ def get():
 def image_processing():
   try:
     image_base64 = request.get_data()
-    print('image_base64 worked')
+    print('image_base64 worked', image_base64)
     #image_bytes = base64.b64decode(image_base64)
     #print('image_bytes worked')
     removed_background_data = remove(image_base64)
