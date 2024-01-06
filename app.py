@@ -6,6 +6,7 @@ import cv2
 import os
 import urllib.parse
 import base64
+from io import BytesIO
 
 app = Flask(__name__)
 
@@ -42,15 +43,14 @@ def get():
 def image_processing():
   try:
     image_base64 = request.get_data()
-    print('image_base64 worked', image_base64)
+    print('image_base64 worked')
     #image_bytes = base64.b64decode(image_base64)
     #print('image_bytes worked')
     removed_background_data = remove(image_base64)
     print('removed worked')
 
-    removed_background_base64 = base64.b64encode(removed_background_data).decode('utf-8') + '.png'
-    #print(removed_background_base64)
-    return jsonify({'removed_background': removed_background_base64})
+    removed_background_base64 = base64.b64encode(removed_background_data)
+    return removed_background_base64
   except Exception as e:
     return jsonify({'error': str(e)}), 500
   
