@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify
-#from rembg import remove
-from rembg import rembg
+from rembg import remove
 import numpy as np
 from PIL import Image
 import cv2
@@ -31,7 +30,7 @@ def remove_background(image):
 
   input = Image.open(input_path)
   print('after input')
-  output = rembg.remove(input)
+  output = remove(input)
   output.save(output_path)
   print('done in rembg')
   return output
