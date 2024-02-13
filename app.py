@@ -9,6 +9,7 @@ from keras.applications.resnet import preprocess_input
 import json
 
 app = Flask(__name__)
+app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
 
 print('hi')
 model = None 
