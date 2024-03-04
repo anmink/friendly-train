@@ -64,7 +64,13 @@ def image_processing():
   print("Predicted article class:", article_predicted_class)
   print("Predicted color class:", color_predicted_class)
 
-  return removed_background_base64
+  data = removed_background_base64, color_predicted_class
+
+  return json.dumps({
+     'image': removed_background_base64.decode('utf-8'),
+     'type': article_predicted_class,
+     'color': color_predicted_class
+  })
   
 
 def decode_base64_to_image(base64_string):
